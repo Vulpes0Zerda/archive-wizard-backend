@@ -3,4 +3,5 @@ package de.htwberlin.archivewizard.user;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
+  User getById(Integer id);
 }
