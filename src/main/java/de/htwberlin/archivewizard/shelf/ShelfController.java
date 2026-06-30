@@ -1,18 +1,29 @@
 package de.htwberlin.archivewizard.shelf;
 
+import java.util.List;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
 @RequestMapping(value = "/shelf-manager")
 public class ShelfController {
-    @GetMapping("./get-overview/{userId}")
-    public String getAllShelfs(@PathVariable Integer userId) {
-        return new String();
+
+    private final ShelfService shelfService;
+
+    public ShelfController(ShelfService shelfService) {
+        this.shelfService = shelfService;
     }
-    
+
+    // todo: needs check if user is logged in
+    @GetMapping("/get-overview/{userId}")
+    public ResponseEntity<List<Shelf>> getAllShelfs(@PathVariable Integer userId) {
+        return ResponseEntity.status(HttpStatusCode.valueOf(200))
+                .body(this.shelfService.getAllShelfs(userId));
+    }
+
 }
