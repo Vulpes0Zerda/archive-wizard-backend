@@ -10,10 +10,12 @@ public class UserService {
     this.userRepository = userRepository;
   }
 
-  public void createUser(RegisterUserRecord registerUserRecord) {
+  // todo: don't return User, return jwt auth token instead
+  public User createUser(RegisterUserRecord registerUserRecord) {
     User user = new User(registerUserRecord.name(), registerUserRecord.email(),
         registerUserRecord.password());
     userRepository.save(user);
+    return user;
   }
 
 }

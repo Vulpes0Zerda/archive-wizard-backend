@@ -31,7 +31,7 @@ public class ShelfController {
     }
 
     @PostMapping("/create-shelf")
-    public ResponseEntity<Shelf> createShelf(@RequestBody CreateShelfRecord shelf) {
+    public ResponseEntity<List<Shelf>> createShelf(@RequestBody CreateShelfRecord shelf) {
         return ResponseEntity.status(HttpStatus.CREATED).body(shelfService.createShelf(shelf));
     }
 
