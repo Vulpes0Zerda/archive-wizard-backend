@@ -1,0 +1,23 @@
+info:
+  name: registerUser
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:8080/user-manager/register-user
+  body:
+    type: json
+    data: |-
+      {
+        "name":"Frieren",
+        "email":"strongest.elvemage.evaaaa@post.hr",
+        "password":"1234"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
