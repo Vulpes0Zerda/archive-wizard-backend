@@ -1,0 +1,20 @@
+info:
+  name: createCategoryGroup
+  type: http
+
+http:
+  method: POST
+  url: http://localhost:8080/category-group-manager/create-category-group
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Spellbooks"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
