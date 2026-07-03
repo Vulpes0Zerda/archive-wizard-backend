@@ -26,4 +26,11 @@ public class ShelfService {
             throw new IllegalArgumentException("User not found with ID: " + userId);
         }
     }
+
+    public Shelf createShelf(CreateShelfRecord shelfInformation) {
+        Shelf shelf = new Shelf(shelfInformation.user(), shelfInformation.categoryGroup(),
+                shelfInformation.name(), shelfInformation.position());
+        shelfRepository.save(shelf);
+        return shelf;
+    }
 }
