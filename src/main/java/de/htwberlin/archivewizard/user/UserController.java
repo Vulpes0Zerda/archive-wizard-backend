@@ -1,5 +1,6 @@
 package de.htwberlin.archivewizard.user;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,9 +17,9 @@ public class UserController {
   }
 
   @PostMapping("/register-user")
-  public ResponseEntity<String> createUser(@RequestBody RegisterUserRecord user) {
-    userService.createUser(user);
-    return ResponseEntity.ok().build();
+  public ResponseEntity<User> createUser(@RequestBody RegisterUserRecord user) {
+    User savedUser = userService.createUser(user);
+    return ResponseEntity.status(HttpStatus.CREATED.value()).body(savedUser);
   }
 
 }

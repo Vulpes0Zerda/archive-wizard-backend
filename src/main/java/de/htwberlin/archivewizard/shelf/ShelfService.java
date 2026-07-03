@@ -27,10 +27,10 @@ public class ShelfService {
         }
     }
 
-    public Shelf createShelf(CreateShelfRecord shelfInformation) {
+    public List<Shelf> createShelf(CreateShelfRecord shelfInformation) {
         Shelf shelf = new Shelf(shelfInformation.user(), shelfInformation.categoryGroup(),
                 shelfInformation.name(), shelfInformation.position());
         shelfRepository.save(shelf);
-        return shelf;
+        return shelfRepository.findByUserId(shelfInformation.user().getId());
     }
 }
