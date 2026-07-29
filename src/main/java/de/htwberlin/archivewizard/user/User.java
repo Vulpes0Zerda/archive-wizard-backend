@@ -1,5 +1,6 @@
 package de.htwberlin.archivewizard.user;
 
+import de.htwberlin.archivewizard.category.group.CategoryGroup;
 // ArchiveWizard
 import de.htwberlin.archivewizard.shelf.Shelf;
 
@@ -43,6 +44,9 @@ public class User {
 
   @OneToMany(mappedBy = "user")
   private List<Shelf> shelfs;
+
+  @OneToMany(mappedBy = "user")
+  private List<CategoryGroup> categoryGroups;
 
   // ──────────────────────────────────────────────────────────────
   // Constructors
