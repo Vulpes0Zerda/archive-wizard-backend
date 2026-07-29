@@ -43,6 +43,9 @@ public class CategoryKey {
   @Column(name = "key", nullable = false, length = 80)
   private String key;
 
+  @Column(name = "position", nullable = false, columnDefinition = "SMALLINT")
+  private Short position;
+
   @OneToMany(mappedBy = "categoryKey", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<CategoryValue> categoryValues;
 
@@ -52,9 +55,10 @@ public class CategoryKey {
 
   protected CategoryKey() {}
 
-  public CategoryKey(String key, CategoryGroup categoryGroup) {
-    this.key = key;
+  public CategoryKey(CategoryGroup categoryGroup, String key, Short position) {
     this.categoryGroup = categoryGroup;
+    this.key = key;
+    this.position = position;
   }
 
   // ──────────────────────────────────────────────────────────────
@@ -64,12 +68,16 @@ public class CategoryKey {
     this.id = id;
   }
 
+  public void setCategoryGroup(final CategoryGroup categoryGroup) {
+    this.categoryGroup = categoryGroup;
+  }
+
   public void setKey(final String key) {
     this.key = key;
   }
 
-  public void setCategoryGroup(final CategoryGroup categoryGroup) {
-    this.categoryGroup = categoryGroup;
+  public void setPosition(final Short position) {
+    this.position = position;
   }
 
   // ──────────────────────────────────────────────────────────────
@@ -80,12 +88,16 @@ public class CategoryKey {
     return this.id;
   }
 
+  public CategoryGroup getCategoryGroup() {
+    return this.categoryGroup;
+  }
+
   public String getKey() {
     return this.key;
   }
 
-  public CategoryGroup getCategoryGroup() {
-    return this.categoryGroup;
+  public Short getPosition() {
+    return this.position;
   }
 
   public List<CategoryValue> getCategoryValues() {
