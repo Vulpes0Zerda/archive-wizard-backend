@@ -30,7 +30,7 @@ public class Shelf {
   @Column(name = "id", nullable = false, unique = true)
   private Long id;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "owned_by_user", nullable = false)
   private User user;
 
@@ -120,9 +120,6 @@ public class Shelf {
     final Shelf otherShelf = (Shelf) otherObject;
 
     if (!otherShelf.getId().equals(this.getId())) {
-      return false;
-    }
-    if (!otherShelf.getUser().equals(this.getUser())) {
       return false;
     }
 
