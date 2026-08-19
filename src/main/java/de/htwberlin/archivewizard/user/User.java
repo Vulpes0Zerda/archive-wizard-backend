@@ -36,11 +36,11 @@ public class User {
   private String name;
 
   @Column(name = "e_mail", unique = true, nullable = false, length = 320)
-  private String Email;
+  private String email;
 
-  @Column(name = "password_hash", nullable = false, columnDefinition = "TEXT")
+  @Column(name = "passwordHash", nullable = false, columnDefinition = "TEXT")
   @Lob
-  private String password_hash;
+  private String passwordHash;
 
   @OneToMany(mappedBy = "user")
   private List<Shelf> shelfs;
@@ -54,10 +54,10 @@ public class User {
 
   protected User() {}
 
-  public User(String name, String Email, String password_hash) {
+  public User(String name, String email, String passwordHash) {
     this.name = name;
-    this.Email = Email;
-    this.password_hash = password_hash;
+    this.email = email;
+    this.passwordHash = passwordHash;
   }
 
   // ──────────────────────────────────────────────────────────────
@@ -72,12 +72,12 @@ public class User {
     this.name = name;
   }
 
-  public void setEmail(final String Email) {
-    this.Email = Email;
+  public void setEmail(final String email) {
+    this.email = email;
   }
 
-  public void setPassword_hash(final String password_hash) {
-    this.password_hash = password_hash;
+  public void setPasswordHash(final String passwordHash) {
+    this.passwordHash = passwordHash;
   }
 
   // ──────────────────────────────────────────────────────────────
@@ -93,11 +93,11 @@ public class User {
   }
 
   public String getEmail() {
-    return this.Email;
+    return this.email;
   }
 
-  public String getPassword_hash() {
-    return this.password_hash;
+  public String getPasswordHash() {
+    return this.passwordHash;
   }
 
   // ──────────────────────────────────────────────────────────────
