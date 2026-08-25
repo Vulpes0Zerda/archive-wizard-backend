@@ -1,23 +1,28 @@
 info:
-  name: createCategoryGroup
+  name: createShelf
   type: http
   seq: 1
 
 http:
   method: POST
-  url: http://localhost:8080/category-group-manager/create-category-group
+  url: http://localhost:8080/shelf-manager/create-shelf
   body:
     type: json
     data: |-
       {
-        "name": "Spellbooks",
         "user": {
           "id": 3,
           "email": "strongest.elvemage.evaaaa@post.hr",
           "name": "Frieren",
-          "password": 685537
-        }
-        
+          "passwordHash": 685537
+        },
+        "categoryGroup": {
+          "id": 1,
+          "name": "Spellbooks",
+          "user": null
+        },
+        "name": "My Spellbooks",
+        "position": 0
       }
   auth: inherit
 

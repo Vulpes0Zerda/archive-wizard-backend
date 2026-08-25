@@ -14,7 +14,7 @@ public class CategoryGroupService {
     }
 
     public List<CategoryGroup> createCategoryGroup(CreateCategoryGroupRecord createCategoryGroupRecord){
-        CategoryGroup categoryGroup = new CategoryGroup(createCategoryGroupRecord.name());
+        CategoryGroup categoryGroup = new CategoryGroup(createCategoryGroupRecord.name(), createCategoryGroupRecord.user());
         categoryGroupRepository.save(categoryGroup);
         ArrayList<CategoryGroup> categoryGroups = new ArrayList<CategoryGroup>();
         categoryGroups.add(categoryGroup);

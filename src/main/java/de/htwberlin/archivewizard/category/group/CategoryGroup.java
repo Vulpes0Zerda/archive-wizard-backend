@@ -59,6 +59,12 @@ public class CategoryGroup {
     this.name = name;
   }
 
+  public CategoryGroup(String name, User user){
+    this.name = name;
+    this.user = user;
+
+  }
+
   // ──────────────────────────────────────────────────────────────
   // Setters
   // ──────────────────────────────────────────────────────────────
