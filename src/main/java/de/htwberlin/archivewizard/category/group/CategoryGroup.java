@@ -8,6 +8,8 @@ import de.htwberlin.archivewizard.category.key.CategoryKey;
 // Java
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // JPA
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,6 +46,7 @@ public class CategoryGroup {
   private String name;
 
   @OneToMany(mappedBy = "categoryGroup")
+  @JsonIgnore
   private List<Shelf> shelfs;
 
   @OneToMany(mappedBy = "categoryGroup")
