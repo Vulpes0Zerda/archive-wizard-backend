@@ -1,51 +1,40 @@
 package de.htwberlin.archivewizard.user;
 
-import java.util.Optional;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import de.htwberlin.archivewizard.auth.RegisterUserRequest;
+import de.htwberlin.archivewizard.auth.SecurityConfig;
+import jakarta.transaction.Transactional;
 
+/**
+ * Handles user account lifecycle operations such as registration and authentication checks.
+ *
+ * <p>
+ * This service coordinates with the persistence layer to store new users and verify submitted
+ * credentials against the hashed password stored in the database.
+ * </p>
+ */
 @Service
 public class UserService {
   private final UserRepository userRepository;
-  BCryptPasswordEncoder passwordEncoder;
+  private final SecurityConfig securityConfig;
 
+  public UserService(UserRepository userRepository, SecurityConfig securityConfig) {
 
-  public UserService(UserRepository userRepository) {
     this.userRepository = userRepository;
-    this.passwordEncoder = new BCryptPasswordEncoder(16);
+    this.securityConfig = securityConfig;
   }
 
-  public void createUser(RegisterUserRecord registerUserRecord) throws Exception {
-    User user = new User(registerUserRecord.name(), registerUserRecord.email(),
-        this.passwordEncoder(registerUserRecord.password()));
+  /**
+   * Creates a new user record and persists it after hashing the supplied password.
+   *
+   * @param registerUserRecord the validated registration payload from the client
+   * @throws Exception if hashing or persistence fails during the registration flow
+   */
+  @Transactional
+  public void createUser(RegisterUserRequest registerUserRecord) throws Exception {
+    User user = new User(registerUserRecord.name(), registerUserRecord.email().trim().toLowerCase(),
+        this.securityConfig.passwordEncoder().encode(registerUserRecord.password()));
     userRepository.save(user);
-  }
-
-  public void loginUser(LoginUserRecord loginUserRecord) throws Exception {
-    // retrives the user from the db
-    Optional<User> user = userRepository.findUserByEmail(loginUserRecord.email());
-
-    // checks if user exists
-    // TODO: make a error handler for all optional types
-    if (user.isEmpty()) {
-      throw new RuntimeException(
-          "No user with the e-mail: " + loginUserRecord.email() + "was found.");
-    }
-
-    // checks if hashes match
-    if (passwordMatches(loginUserRecord.password(), user.get().getPasswordHash())) {
-
-    } else {
-      throw new RuntimeException("Entered Password does not match saved one.");
-    }
-  }
-
-  private String passwordEncoder(String password) throws Exception {
-    return passwordEncoder.encode(password);
-  }
-
-  private Boolean passwordMatches(String enteredPasswordString, String recivedPasswordHash) {
-    return passwordEncoder.matches(enteredPasswordString, recivedPasswordHash);
   }
 
 }

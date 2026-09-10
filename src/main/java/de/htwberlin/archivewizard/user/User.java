@@ -1,23 +1,35 @@
 package de.htwberlin.archivewizard.user;
 
-import de.htwberlin.archivewizard.category.group.CategoryGroup;
 // ArchiveWizard
+import de.htwberlin.archivewizard.category.group.CategoryGroup;
 import de.htwberlin.archivewizard.shelf.Shelf;
 
 // Java
 import java.util.List;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.dialect.type.PostgreSQLEnumJdbcType;
 
 // JPA
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
+/**
+ * Represents a single application user and the account state used for authentication.
+ *
+ * <p>
+ * A user owns shelves and category groups, and stores a password hash rather than a plain-text
+ * password. The entity is persisted by JPA into the users table and is used as the core identity
+ * for the archive management domain.
+ * </p>
+ */
 @Entity
 @Table(name = "users")
 public class User {
@@ -35,12 +47,16 @@ public class User {
   @Column(name = "name", nullable = false, length = 120)
   private String name;
 
-  @Column(name = "e_mail", unique = true, nullable = false, length = 320)
+  @Column(name = "email", unique = true, nullable = false, length = 320)
   private String email;
 
   @Column(name = "passwordHash", nullable = false, columnDefinition = "TEXT")
-  @Lob
   private String passwordHash;
+
+  @Column(name = "authority", nullable = false)
+  @Enumerated(EnumType.STRING)
+  @JdbcType(value = PostgreSQLEnumJdbcType.class)
+  private Authority authority = Authority.USER;
 
   @OneToMany(mappedBy = "user")
   private List<Shelf> shelfs;
@@ -80,6 +96,10 @@ public class User {
     this.passwordHash = passwordHash;
   }
 
+  public void setAuthority(final Authority authority) {
+    this.authority = authority;
+  }
+
   // ──────────────────────────────────────────────────────────────
   // Getters
   // ──────────────────────────────────────────────────────────────
@@ -98,6 +118,10 @@ public class User {
 
   public String getPasswordHash() {
     return this.passwordHash;
+  }
+
+  public Authority getAuthority() {
+    return this.authority;
   }
 
   // ──────────────────────────────────────────────────────────────
@@ -132,9 +156,9 @@ public class User {
 
   @Override
   public String toString() {
-    return String.format("%s - @%d[\n  id=%d, name='%s', Email='%s'\n]",
+    return String.format("%s - @%d[\n  id=%d, name='%s', email='%s', authority='%s'\n]",
         this.getClass().getSimpleName(), System.identityHashCode(this), getId(), getName(),
-        getEmail());
+        getEmail(), getAuthority().toString());
   }
 
 }
