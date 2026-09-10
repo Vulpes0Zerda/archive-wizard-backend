@@ -7,7 +7,7 @@ import de.htwberlin.archivewizard.category.key.CategoryKey;
 
 // Java
 import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 // JPA
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,6 +21,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
+/**
+ * Represents a named group of archive categories belonging to a user.
+ *
+ * <p>
+ * A category group acts as a container for multiple category keys and shelves, making it the
+ * organizing unit for how archive metadata is grouped in the application.
+ * </p>
+ */
 @Entity
 @Table(name = "category_groups")
 public class CategoryGroup {
@@ -44,6 +52,7 @@ public class CategoryGroup {
   private String name;
 
   @OneToMany(mappedBy = "categoryGroup")
+  @JsonIgnore
   private List<Shelf> shelfs;
 
   @OneToMany(mappedBy = "categoryGroup")
