@@ -17,7 +17,7 @@ public class TemplateUserDetailsService implements UserDetailsService {
   public UserDetails loadUserByUsername(String email) {
     String normalizedEmail = email.trim().toLowerCase();
     User user = userRepository.findByEmailIgnoreCase(normalizedEmail).orElseThrow(
-        () -> new UsernameNotFoundException("No User found with the E-Mail: " + email));
+        () -> new UsernameNotFoundException("No User found with the E-Mail: " + normalizedEmail));
     return org.springframework.security.core.userdetails.User.withUsername(user.getEmail())
         .password(user.getPasswordHash()).authorities(user.getAuthority().toAuthority()).build();
   }

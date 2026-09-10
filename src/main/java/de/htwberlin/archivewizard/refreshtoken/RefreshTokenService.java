@@ -10,6 +10,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Base64;
 import java.util.List;
 import org.springframework.http.ResponseCookie;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import de.htwberlin.archivewizard.auth.LoginUserRequest;
@@ -45,20 +46,20 @@ public class RefreshTokenService {
     @Transactional
     public RefreshTokenRotationResult rotate(String rawToken) {
         if (rawToken == null || rawToken.isBlank()) {
-            throw new InvalidRefreshTokenException("Invalid refresh token");
+            throw new BadCredentialsException("Invalid refresh token");
         }
 
         RefreshToken stored = refreshTokenRepository.findByHash(hash(rawToken))
-                .orElseThrow(() -> new InvalidRefreshTokenException("Invalid refresh token"));
+                .orElseThrow(() -> new BadCredentialsException("Invalid refresh token"));
 
         if (stored.getIsRevoked()) {
             // token reuse after rotation means likely theft
             // nuke every session for this user
             refreshTokenRepository.deleteAllByUser(stored.getUser());
-            throw new InvalidRefreshTokenException("Refresh token reuse detected");
+            throw new BadCredentialsException("Refresh token reuse detected");
         }
         if (stored.getExpiresAt().isBefore(Instant.now())) {
-            throw new InvalidRefreshTokenException("Refresh token expired");
+            throw new BadCredentialsException("Refresh token expired");
         }
 
         stored.setIsRevoked(true);
@@ -70,7 +71,7 @@ public class RefreshTokenService {
     @Transactional
     public void revokeSingleToken(String rawToken) {
         RefreshToken refreshToken = refreshTokenRepository.findByHash(hash(rawToken))
-                .orElseThrow(() -> new InvalidRefreshTokenException("Invalid refresh token"));
+                .orElseThrow(() -> new BadCredentialsException("Invalid refresh token"));
         refreshToken.setIsRevoked(true);
         refreshToken.setRevokedAt(Instant.now());
         refreshTokenRepository.save(refreshToken);
@@ -86,7 +87,7 @@ public class RefreshTokenService {
         refreshTokenRepository.saveAll(refreshTokenList);
     }
 
-    public String createRefreshToken(LoginUserRequest loginUserData) {
+    public String createRefreshToken(LoginUserRequest loginUserData) throws Exception {
         User user = userRepository.findByEmailIgnoreCase(loginUserData.email()).orElseThrow();
         return issue(user);
     }
