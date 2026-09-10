@@ -16,6 +16,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
+/**
+ * Represents a shelf within a user's archive structure.
+ *
+ * <p>
+ * A shelf belongs to one user and one category group, and contains a collection of items. The
+ * position field allows ordering within the category group layout.
+ * </p>
+ */
 @Entity
 @Table(name = "shelfs")
 public class Shelf {

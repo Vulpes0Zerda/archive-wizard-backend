@@ -22,6 +22,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
+/**
+ * Represents an archive item stored inside a shelf.
+ *
+ * <p>
+ * An item belongs to a single shelf, has a name, and stores a binary picture. Additional metadata
+ * values for the item are modelled as category values linked to its category keys.
+ * </p>
+ */
 @Entity
 @Table(name = "items")
 public class Item {

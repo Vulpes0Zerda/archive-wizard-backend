@@ -21,6 +21,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
+/**
+ * Describes one metadata field inside a category group.
+ *
+ * <p>
+ * Each key has a label such as "author" or "material" and a display position within its group. It
+ * owns one or more category values when items are assigned to the shelf structure.
+ * </p>
+ */
 @Entity
 @Table(name = "category_keys")
 public class CategoryKey {
