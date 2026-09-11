@@ -1,0 +1,23 @@
+info:
+  name: createCategoryGroup
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:8080/category-group-manager/create-category-group
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Spellbooks"
+      }
+  auth:
+    type: bearer
+    token: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoic3Ryb25nZXN0LmVsdmVtYWdlQHBvc3QuaHIiLCJ1aWQiOjEsImV4cCI6MTc4OTA4NzIzNiwiaWF0IjoxNzg5MDg2MzM2LCJyb2xlcyI6IlJPTEVfVVNFUiBGQUNUT1JfUEFTU1dPUkQifQ.tqJk_1WUuwyW_bgDwiuFBE4_RD7LTRYFo5J1CscL-eq8a5PAwNolFAJATSsRxQOrHv6l8s08V1-BgC0aezKysB90lJPER1xAYcaC-Rxs54gx04kV-g0oJJbSQyyZJqIJ6WSFbtSe1-Zc9j5Ooa_z05eXPT9d8QNJgkNv6uFQcKKVoBGn4mE_fa9QVJovoLiDsAO0AIqJVMAjuFMYaXPrKq8V6ekpA5jMDuyn84AfJ9ndMG4EaaR_xvUBS7Duz0vOK3mlyymPCnpzATgqYYHZBdfFh-YpPg1iZTvBomQ7f4pGgwfjxJskhDOo1jvqtoemDlin7zio6JD04_z2m46xgw
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -17,6 +17,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
+/**
+ * Stores the actual value for a category key on a specific item.
+ *
+ * <p>
+ * A category value links a particular item to a category key and holds the user-defined content for
+ * that metadata field, such as the value for a title, date, or description.
+ * </p>
+ */
 @Entity
 @Table(name = "category_values")
 public class CategoryValue {

@@ -1,12 +1,11 @@
 package de.htwberlin.archivewizard.category.group;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Controller;
 
-import de.htwberlin.archivewizard.shelf.ShelfService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +21,15 @@ public class CategoryGroupController {
     }
 
     @PostMapping("/create-category-group")
-    public ResponseEntity<List<CategoryGroup>> createCategoryGroup(@RequestBody CreateCategoryGroupRecord categoryGroup) {
-        List<CategoryGroup> savedCategoryGroups = categoryGroupService.createCategoryGroup(categoryGroup);
+    public ResponseEntity<CategoryGroup> createCategoryGroup(
+            @RequestBody CreateCategoryGroupRequest categoryGroup,
+            @AuthenticationPrincipal Jwt decodedJwt) {
+
+
+        CategoryGroup savedCategoryGroups =
+                categoryGroupService.createCategoryGroup(categoryGroup, decodedJwt.getClaim("uid"));
         return ResponseEntity.status(HttpStatus.CREATED.value()).body(savedCategoryGroups);
     }
-    
-    
+
+
 }

@@ -5,13 +5,13 @@ info:
 
 http:
   method: POST
-  url: http://localhost:8080/user-manager/register-user
+  url: http://localhost:8080/auth-manager/register
   body:
     type: json
     data: |-
       {
         "name":"Frieren",
-        "email":"strongest.elvemage.evaaaa@post.hr",
+        "email":"strongest.elvemage@post.hr",
         "password":"1234"
       }
   auth: inherit
