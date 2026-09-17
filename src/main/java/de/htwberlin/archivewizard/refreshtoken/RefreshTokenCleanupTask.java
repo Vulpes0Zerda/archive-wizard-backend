@@ -18,6 +18,8 @@ public class RefreshTokenCleanupTask {
   @Scheduled(cron = "0 0 3 * * *")
   @Transactional
   public void cleanup() {
-    refreshTokenRepository.deleteStale(Instant.now(), Instant.now().minus(2, ChronoUnit.DAYS));
+    Instant paramNow = Instant.now();
+    Instant paramTwoDays = Instant.now().minus(2, ChronoUnit.DAYS);
+    refreshTokenRepository.deleteStale(paramNow, paramTwoDays);
   }
 }

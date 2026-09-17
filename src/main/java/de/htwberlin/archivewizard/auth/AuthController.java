@@ -46,7 +46,7 @@ public class AuthController {
    * Registers a new user through the authentication API.
    *
    * @param registerUserRecord the account data submitted by the client
-   * @return 200 OK on success, otherwise 400 BAD REQUEST
+   * @return 201 CREATED on success, otherwise 400 BAD REQUEST
    */
   @PostMapping("/register")
   public ResponseEntity<Map<String, String>> register(
@@ -57,7 +57,7 @@ public class AuthController {
       LoginUserRequest loginUserData =
           new LoginUserRequest(registerUserData.email(), registerUserData.password());
 
-      return ResponseEntity.status(HttpStatus.OK)
+      return ResponseEntity.status(HttpStatus.CREATED)
           .header(HttpHeaders.SET_COOKIE,
               refreshTokenService
                   .buildRefreshCookie(refreshTokenService.createRefreshToken(loginUserData)))
@@ -87,19 +87,25 @@ public class AuthController {
   @PostMapping("/refresh")
   public ResponseEntity<Map<String, String>> refresh(
       @CookieValue("refresh_token") String refreshCookie) {
-    RefreshTokenRotationResult refreshTokenRotationResult =
-        refreshTokenService.rotate(refreshCookie);
-    return ResponseEntity.status(HttpStatus.OK)
-        .header(HttpHeaders.SET_COOKIE,
-            refreshTokenService.buildRefreshCookie(refreshTokenRotationResult.token()))
-        .body(accessTokenService.refreshAccessToken(refreshTokenRotationResult));
+    try {
+      RefreshTokenRotationResult refreshTokenRotationResult =
+          refreshTokenService.rotate(refreshCookie);
+      return ResponseEntity.status(HttpStatus.CREATED)
+          .header(HttpHeaders.SET_COOKIE,
+              refreshTokenService.buildRefreshCookie(refreshTokenRotationResult.token()))
+          .body(accessTokenService.refreshAccessToken(refreshTokenRotationResult));
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
   }
 
   @PostMapping("/logout")
-  public ResponseEntity<Void> logout(@CookieValue("refresh_token") String refreshCookie) {
+  public ResponseEntity<HttpHeaders> logout(@CookieValue("refresh_token") String refreshCookie) {
     try {
       refreshTokenService.revokeSingleToken(refreshCookie);
-      return ResponseEntity.status(HttpStatus.OK).build();
+      return ResponseEntity.status(HttpStatus.OK)
+          .header(HttpHeaders.SET_COOKIE, refreshTokenService.buildExpiredRefreshCookie()).build();
     } catch (Exception e) {
       logger.error(e.getMessage());
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
