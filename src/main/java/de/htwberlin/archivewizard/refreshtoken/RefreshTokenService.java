@@ -92,10 +92,16 @@ public class RefreshTokenService {
         return issue(user);
     }
 
+    // ! TODO: ONCE HTTPS IS FIGURED OUT, CHANGE SECURE() BACK TO TRUE!
     public String buildRefreshCookie(String rawToken) {
-        return ResponseCookie.from("refresh_token", rawToken).httpOnly(true).secure(true)
+        return ResponseCookie.from("refresh_token", rawToken).httpOnly(true).secure(false)
                 .path("/auth-manager").maxAge(Duration.ofDays(30)).sameSite("Strict").build()
                 .toString();
+    }
+
+    public String buildExpiredRefreshCookie() {
+        return ResponseCookie.from("refresh_token", "deleted").httpOnly(true).secure(false)
+                .path("/auth-manager").maxAge(Duration.ZERO).sameSite("Strict").build().toString();
     }
 
     private String hash(String rawToken) {
