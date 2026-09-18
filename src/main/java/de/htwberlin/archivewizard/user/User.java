@@ -74,6 +74,7 @@ public class User {
     this.name = name;
     this.email = email;
     this.passwordHash = passwordHash;
+    this.authority = Authority.USER;
   }
 
   // ──────────────────────────────────────────────────────────────

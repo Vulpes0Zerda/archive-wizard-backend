@@ -1,18 +1,20 @@
 info:
-  name: createShelf
+  name: getAllItems
   type: http
   seq: 1
 
 http:
-  method: POST
-  url: http://localhost:8080/shelf-manager/create-shelf
+  method: GET
+  url: http://localhost:8080/item-manager/get-all-items?shelfId=1
+  params:
+    - name: shelfId
+      value: "1"
+      type: query
   body:
     type: json
     data: |-
       {
-        "name": "Spellbooks",
-        "position": 1,
-        "categoryGroupId": 1
+        "shelfId": 1
       }
   auth:
     type: bearer

@@ -17,10 +17,10 @@ public class ItemService {
     this.shelfRepository = shelfRepository;
   }
 
-  public List<Item> getAllItems(Integer userId, Long shelfId) throws Exception{
+  public List<Item> getAllItems(Number userId, Long shelfId) throws Exception{
     Shelf shelf = shelfRepository.getReferenceById(shelfId);
 
-    if(shelf.getUser().getId().equals(userId)){
+    if(shelf.getUser().getId().equals(userId.intValue())){
       return shelf.getItems();
     }
     else {
