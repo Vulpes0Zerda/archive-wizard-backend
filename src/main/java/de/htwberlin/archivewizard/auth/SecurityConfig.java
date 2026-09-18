@@ -108,6 +108,4 @@ public class SecurityConfig {
 
     return http.build();
   }
-
-  // TODO: Add CorsConfigurationSource to configure cross origin requests over the board
 }
