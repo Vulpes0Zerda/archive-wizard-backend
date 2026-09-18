@@ -7,6 +7,8 @@ import de.htwberlin.archivewizard.category.value.CategoryValue;
 // Java
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // JPA
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -46,6 +48,7 @@ public class CategoryKey {
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "belongs_to_category_group", nullable = false)
+  @JsonIgnore
   private CategoryGroup categoryGroup;
 
   @Column(name = "key", nullable = false, length = 80)
