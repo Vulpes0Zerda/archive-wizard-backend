@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(value = "/shelf-manager")
-@CrossOrigin(origins = "http://localhost:4200")
 public class ShelfController {
 
   private final ShelfService shelfService;

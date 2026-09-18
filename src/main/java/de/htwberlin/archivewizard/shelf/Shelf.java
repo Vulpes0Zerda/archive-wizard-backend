@@ -1,7 +1,10 @@
 package de.htwberlin.archivewizard.shelf;
 
+import java.util.List;
+
 // ArchiveWizard
 import de.htwberlin.archivewizard.category.group.CategoryGroup;
+import de.htwberlin.archivewizard.item.Item;
 import de.htwberlin.archivewizard.user.User;
 
 // JPA
@@ -13,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -51,6 +55,9 @@ public class Shelf {
 
   @Column(name = "position", nullable = false, columnDefinition = "SMALLINT")
   private Short position;
+  
+  @OneToMany(mappedBy = "shelf")
+  private List<Item> items;
 
   // ──────────────────────────────────────────────────────────────
   // Constructors
@@ -110,6 +117,10 @@ public class Shelf {
 
   public Short getPosition() {
     return this.position;
+  }
+
+  public List<Item> getItems() {
+    return this.items;
   }
 
   // ──────────────────────────────────────────────────────────────
