@@ -48,6 +48,7 @@ public class CategoryGroup {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "owned_by_user", nullable = true)
+  @JsonIgnore
   private User user;
 
   @Column(name = "name", nullable = false, length = 80)

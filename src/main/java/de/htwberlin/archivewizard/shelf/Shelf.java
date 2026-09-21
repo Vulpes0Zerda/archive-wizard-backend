@@ -2,6 +2,7 @@ package de.htwberlin.archivewizard.shelf;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 // ArchiveWizard
 import de.htwberlin.archivewizard.category.group.CategoryGroup;
 import de.htwberlin.archivewizard.item.Item;
@@ -44,6 +45,7 @@ public class Shelf {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "owned_by_user", nullable = false)
+  @JsonIgnore
   private User user;
 
   @ManyToOne(fetch = FetchType.LAZY)
