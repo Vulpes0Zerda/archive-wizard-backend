@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,24 +22,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 
-@Controller 
-@RequestMapping (value = "/item-manager")
+@Controller
+@RequestMapping(value = "/item-manager")
 
 public class ItemController {
 
   private ItemService itemService;
   private final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
-  public ItemController(ItemService itemService){
+  public ItemController(ItemService itemService) {
     this.itemService = itemService;
   }
 
-  @GetMapping("/get-all-items") 
-  @ResponseBody 
-  public ResponseEntity<List<Item>> getAllItems(@AuthenticationPrincipal Jwt decodedJwt, @RequestParam Long shelfId) {
+  @GetMapping("/get-all-items")
+  @ResponseBody
+  public ResponseEntity<List<Item>> getAllItems(@AuthenticationPrincipal Jwt decodedJwt,
+      @RequestParam Long shelfId) {
 
     try {
-      return ResponseEntity.status(HttpStatus.OK).body(this.itemService.getAllItems(decodedJwt.getClaim("uid"), shelfId));
+      return ResponseEntity.status(HttpStatus.OK)
+          .body(this.itemService.getAllItems(decodedJwt.getClaim("uid"), shelfId));
     } catch (Exception e) {
       logger.error(e.getMessage(), e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -48,10 +49,11 @@ public class ItemController {
   }
 
   @PostMapping("/create-item")
-  public ResponseEntity<Item> createItem(@AuthenticationPrincipal Jwt decodedJwt, @RequestBody CreateItemRequest newItem) {
+  public ResponseEntity<Item> createItem(@AuthenticationPrincipal Jwt decodedJwt,
+      @RequestBody CreateItemRequest newItem) {
     try {
       return ResponseEntity.status(HttpStatus.CREATED)
-      .body(this.itemService.createItem(decodedJwt.getClaim("uid"), newItem));
+          .body(this.itemService.createItem(decodedJwt.getClaim("uid"), newItem));
     } catch (Exception e) {
       logger.error(e.getMessage(), e);
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -59,17 +61,18 @@ public class ItemController {
   }
 
   @DeleteMapping("/delete-item")
-  public ResponseEntity<Long> deleteItem(@AuthenticationPrincipal Jwt decodedJwt, @RequestParam Long itemId) {
+  public ResponseEntity<Long> deleteItem(@AuthenticationPrincipal Jwt decodedJwt,
+      @RequestParam Long itemId) {
     try {
       return ResponseEntity.status(HttpStatus.OK)
-      .body(this.itemService.deleteItem(decodedJwt.getClaim("uid"), itemId ));
+          .body(this.itemService.deleteItem(decodedJwt.getClaim("uid"), itemId));
     } catch (Exception e) {
       logger.error(e.getMessage(), e);
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
   }
-  
-  
-  
+
+
+
 }

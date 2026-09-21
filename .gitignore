@@ -11,7 +11,7 @@ build/
 
 ### Secrets ###
 gradle.properties
-!**/src/main/resources/certs/*
+**/src/main/resources/certs/
 
 ### DrawIO ###
 *.bkp
