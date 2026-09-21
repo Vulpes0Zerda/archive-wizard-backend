@@ -10,6 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,9 +35,9 @@ public class ItemController {
     this.itemService = itemService;
   }
 
-  @GetMapping("/get-all-items")
+  @GetMapping("/get-all-items") 
   @ResponseBody 
-public ResponseEntity<List<Item>> getAllItems(@AuthenticationPrincipal Jwt decodedJwt, @RequestParam Long shelfId) {
+  public ResponseEntity<List<Item>> getAllItems(@AuthenticationPrincipal Jwt decodedJwt, @RequestParam Long shelfId) {
 
     try {
       return ResponseEntity.status(HttpStatus.OK).body(this.itemService.getAllItems(decodedJwt.getClaim("uid"), shelfId));
@@ -46,11 +47,27 @@ public ResponseEntity<List<Item>> getAllItems(@AuthenticationPrincipal Jwt decod
     }
   }
 
-  @PostMapping("path")
-  public String postMethodName(@RequestBody String entity) {
-      //TODO: process POST request
-      
-      return entity;
+  @PostMapping("/create-item")
+  public ResponseEntity<Item> createItem(@AuthenticationPrincipal Jwt decodedJwt, @RequestBody CreateItemRequest newItem) {
+    try {
+      return ResponseEntity.status(HttpStatus.CREATED)
+      .body(this.itemService.createItem(decodedJwt.getClaim("uid"), newItem));
+    } catch (Exception e) {
+      logger.error(e.getMessage(), e);
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+  }
+
+  @DeleteMapping("/delete-item")
+  public ResponseEntity<Long> deleteItem(@AuthenticationPrincipal Jwt decodedJwt, @RequestParam Long itemId) {
+    try {
+      return ResponseEntity.status(HttpStatus.OK)
+      .body(this.itemService.deleteItem(decodedJwt.getClaim("uid"), itemId ));
+    } catch (Exception e) {
+      logger.error(e.getMessage(), e);
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
   }
   
   

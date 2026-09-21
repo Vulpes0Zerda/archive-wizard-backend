@@ -1,0 +1,21 @@
+info:
+  name: deleteItem
+  type: http
+  seq: 1
+
+http:
+  method: DELETE
+  url: http://localhost:8080/item-manager/delete-item?itemId=1
+  params:
+    - name: itemId
+      value: "1"
+      type: query
+  auth:
+    type: bearer
+    token: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoic3Ryb25nZXN0LmVsdmVtYWdlQHBvc3QuaHIiLCJ1aWQiOjEsImV4cCI6MTc5MDAwNzExMCwiaWF0IjoxNzkwMDA2MjEwLCJyb2xlcyI6IlJPTEVfVVNFUiJ9.ovLTN1MFq_kheUsjdn5AqUIlBqxbUFh4Bdky65jggaMQzsCGYmA47uEp9tcZYbPLhaVg0dMEx4Ja-_ba5PqbtrIup1I2KVlKeRaARfv5oIo-3ZUCeVKI0H7y7XVqfxigGA6ixxg8XtFbXFZkCSF4WVMCxQGzsiZNI0PN5JNjNFgXiz1ItUG7de1WoToiHr6RmT3bXYWxOmXEVN5w5KaAlSqm4ozDkDpJ2QIOYIoo9tg__XPMAkCTLUGV74Fm7T_RjugdyoSM-qUlfywNx8oE_LgnwKn1AkG-4Tcvi7MW6PimjXFacl3rafbZJsGywmtOtu6FtwOkhGzNpFWKRCRDaw
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

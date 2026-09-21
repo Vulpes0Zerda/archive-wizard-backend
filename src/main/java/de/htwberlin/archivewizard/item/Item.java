@@ -51,8 +51,7 @@ public class Item {
   @Column(name = "name", nullable = false, length = 120)
   private String name;
 
-  @Column(name = "picture", nullable = false, columnDefinition = "BYTEA")
-  @Lob
+  @Column(name = "picture", nullable = true, columnDefinition = "BYTEA")
   @Basic(fetch = FetchType.EAGER)
   private byte[] picture;
 

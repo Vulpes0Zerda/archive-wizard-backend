@@ -59,6 +59,7 @@ public class Shelf {
   private Short position;
   
   @OneToMany(mappedBy = "shelf")
+  @JsonIgnore 
   private List<Item> items;
 
   // ──────────────────────────────────────────────────────────────
