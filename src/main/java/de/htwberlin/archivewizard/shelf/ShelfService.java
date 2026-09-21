@@ -25,12 +25,12 @@ public class ShelfService {
     return shelfRepository.findByUserId(userId.intValue());
   }
 
-  public Shelf createShelf(CreateShelfRequest shelfInformation, Number userId) {
+  public Shelf createShelf(CreateShelfRequest shelfInformation, Number userId) throws Exception {
     User user = userRepository.getReferenceById(userId.intValue());
     CategoryGroup categoryGroup =
         categoryGroupRepository.getReferenceById(shelfInformation.categoryGroupId().longValue());
-    Shelf shelf =
-        new Shelf(user, categoryGroup, shelfInformation.name(), shelfInformation.position());
+    Shelf shelf = new Shelf(user, categoryGroup, shelfInformation.name(),
+        shelfInformation.position().shortValue());
     return shelfRepository.save(shelf);
   }
 }
