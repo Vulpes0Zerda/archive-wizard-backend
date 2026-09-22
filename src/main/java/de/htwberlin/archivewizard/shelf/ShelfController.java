@@ -43,6 +43,8 @@ public class ShelfController {
   public ResponseEntity<Shelf> createShelf(@RequestBody CreateShelfRequest shelf,
       @AuthenticationPrincipal Jwt decodedJwt) {
     try {
+      logger.debug("Trying to create Shelf with uid: " + decodedJwt.getClaim("uid") + " and shelf: "
+          + shelf.toString());
       return ResponseEntity.status(HttpStatus.CREATED)
           .body(shelfService.createShelf(shelf, decodedJwt.getClaim("uid")));
     } catch (Exception e) {
