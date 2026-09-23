@@ -8,10 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -50,6 +52,18 @@ public class ShelfController {
     } catch (Exception e) {
       logger.error(e.getMessage(), e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+  @DeleteMapping("/delete-shelf")
+  public ResponseEntity<Long> deleteShelf(@RequestParam Long shelfId,
+      @AuthenticationPrincipal Jwt decodedJwt) {
+    try {
+      return ResponseEntity.status(HttpStatus.OK)
+          .body(shelfService.deleteShelf(decodedJwt.getClaim("uid"), shelfId));
+    } catch (Exception e) {
+      logger.error(e.getMessage(), e);
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
   }
 

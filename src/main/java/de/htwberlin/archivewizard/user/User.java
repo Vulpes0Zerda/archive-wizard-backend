@@ -3,17 +3,15 @@ package de.htwberlin.archivewizard.user;
 // ArchiveWizard
 import de.htwberlin.archivewizard.category.group.CategoryGroup;
 import de.htwberlin.archivewizard.shelf.Shelf;
-
 // Java
 import java.util.List;
 import org.hibernate.annotations.JdbcType;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.dialect.type.PostgreSQLEnumJdbcType;
-
+import org.hibernate.type.SqlTypes;
 // JPA
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -54,7 +52,7 @@ public class User {
   private String passwordHash;
 
   @Column(name = "authority", nullable = false)
-  @Enumerated(EnumType.STRING)
+  @JdbcTypeCode(SqlTypes.NAMED_ENUM)
   @JdbcType(value = PostgreSQLEnumJdbcType.class)
   private Authority authority = Authority.USER;
 
