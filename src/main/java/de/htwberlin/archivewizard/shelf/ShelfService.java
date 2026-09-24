@@ -33,4 +33,13 @@ public class ShelfService {
         shelfInformation.position().shortValue());
     return shelfRepository.save(shelf);
   }
+
+  public Long deleteShelf(Number userId, Long shelfId) {
+    Shelf shelf = shelfRepository.getReferenceById(shelfId);
+    if (shelf.getUser().getId().equals(userId.intValue())) {
+      shelfRepository.delete(shelf);
+      return shelfId;
+    }
+    return null;
+  }
 }
