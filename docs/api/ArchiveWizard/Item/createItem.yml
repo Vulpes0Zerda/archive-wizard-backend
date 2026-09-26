@@ -11,11 +11,11 @@ http:
     data: |-
       {
         "name": "Fireball",
-        "shelfId": 1
+        "shelfId": 2
       }
   auth:
     type: bearer
-    token: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoic3Ryb25nZXN0LmVsdmVtYWdlQHBvc3QuaHIiLCJ1aWQiOjEsImV4cCI6MTc5MDAwNzExMCwiaWF0IjoxNzkwMDA2MjEwLCJyb2xlcyI6IlJPTEVfVVNFUiJ9.ovLTN1MFq_kheUsjdn5AqUIlBqxbUFh4Bdky65jggaMQzsCGYmA47uEp9tcZYbPLhaVg0dMEx4Ja-_ba5PqbtrIup1I2KVlKeRaARfv5oIo-3ZUCeVKI0H7y7XVqfxigGA6ixxg8XtFbXFZkCSF4WVMCxQGzsiZNI0PN5JNjNFgXiz1ItUG7de1WoToiHr6RmT3bXYWxOmXEVN5w5KaAlSqm4ozDkDpJ2QIOYIoo9tg__XPMAkCTLUGV74Fm7T_RjugdyoSM-qUlfywNx8oE_LgnwKn1AkG-4Tcvi7MW6PimjXFacl3rafbZJsGywmtOtu6FtwOkhGzNpFWKRCRDaw
+    token: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoic3Ryb25nZXN0LmVsdmVtYWdlQHBvc3QuaHIiLCJ1aWQiOjIsImV4cCI6MTc5MDM3MDY2MSwiaWF0IjoxNzkwMzY5NzYxLCJyb2xlcyI6IlJPTEVfVVNFUiJ9.rCx4Pk7QltOgDHOlKLvSIAgHXvSFO-L2Zulj4IfS04UAZSwiyn8n4P5nxKRJmUrPyQCCE1mKrROBNfUK0hc4OwfmkVIWb6QlnpGi4uUNbGsAsdcvasLegMxSQ_gUCjxg_nmikovn9dYSXUr9GPDZGwxI9ygWRgQrB_vQtZVWnOHIOmJsGnyFZl2-VDpBygv1RkGU8lv6DgSuuMSt-lzJv23KXucg8rRG24Kow4D0u_qAsVxENHLdFus4Dly6jfDx9nu_NHeB6ZwAIx4fvmlZ1hz52fe2y8HdMsGalpVo_Gp4p4TWBiO5aEcf0ZZy065u9EwwtduL3j018QS_M8QMkQ
 
 settings:
   encodeUrl: true

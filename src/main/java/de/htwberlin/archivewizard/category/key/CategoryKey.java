@@ -48,7 +48,6 @@ public class CategoryKey {
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "belongs_to_category_group", nullable = false)
-  @JsonIgnore
   private CategoryGroup categoryGroup;
 
   @Column(name = "key", nullable = false, length = 80)
@@ -58,6 +57,7 @@ public class CategoryKey {
   private Short position;
 
   @OneToMany(mappedBy = "categoryKey", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonIgnore
   private List<CategoryValue> categoryValues;
 
   // ──────────────────────────────────────────────────────────────

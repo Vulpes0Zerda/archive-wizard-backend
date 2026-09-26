@@ -54,7 +54,7 @@ public class Item {
   @Basic(fetch = FetchType.EAGER)
   private byte[] picture;
 
-  @OneToMany(mappedBy = "item")
+  @OneToMany(mappedBy = "item", fetch = FetchType.EAGER)
   private List<CategoryValue> categoryValues;
 
   // ──────────────────────────────────────────────────────────────
@@ -88,6 +88,10 @@ public class Item {
     this.picture = picture;
   }
 
+  public void setCategoryValues(final List<CategoryValue> categoryValues) {
+    this.categoryValues = categoryValues;
+  }
+
   // ──────────────────────────────────────────────────────────────
   // Getters
   // ──────────────────────────────────────────────────────────────
@@ -106,6 +110,10 @@ public class Item {
 
   public byte[] getPicture() {
     return this.picture;
+  }
+
+  public List<CategoryValue> getCategoryValues() {
+    return this.categoryValues;
   }
 
   // ──────────────────────────────────────────────────────────────
@@ -140,7 +148,7 @@ public class Item {
 
   @Override
   public String toString() {
-    return String.format("%s - @%d[\n  id=%d, name='%s', picture=%d, shelf={\n    %s\n  }\n]",
+    return String.format("%s - @%d[\n  id=%d, name='%s', picture=%s, shelf={\n    %s\n  }\n]",
         this.getClass().getSimpleName(), System.identityHashCode(this), getId(), getName(),
         getPicture().toString(), getShelf().toString());
   }

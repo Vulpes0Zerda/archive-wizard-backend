@@ -40,8 +40,9 @@ public class ItemController {
       @RequestParam Long shelfId) {
 
     try {
-      return ResponseEntity.status(HttpStatus.OK)
-          .body(this.itemService.getAllItems(decodedJwt.getClaim("uid"), shelfId));
+      List<Item> items = this.itemService.getAllItems(decodedJwt.getClaim("uid"), shelfId);
+      logger.debug(items.toString());
+      return ResponseEntity.status(HttpStatus.OK).body(items);
     } catch (Exception e) {
       logger.error(e.getMessage(), e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -52,8 +53,9 @@ public class ItemController {
   public ResponseEntity<Item> createItem(@AuthenticationPrincipal Jwt decodedJwt,
       @RequestBody CreateItemRequest newItem) {
     try {
-      return ResponseEntity.status(HttpStatus.CREATED)
-          .body(this.itemService.createItem(decodedJwt.getClaim("uid"), newItem));
+      Item item = this.itemService.createItem(decodedJwt.getClaim("uid"), newItem);
+      logger.debug(item.toString());
+      return ResponseEntity.status(HttpStatus.CREATED).body(item);
     } catch (Exception e) {
       logger.error(e.getMessage(), e);
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

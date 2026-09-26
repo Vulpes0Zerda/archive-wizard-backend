@@ -5,10 +5,10 @@ info:
 
 http:
   method: GET
-  url: http://localhost:8080/item-manager/get-all-items?shelfId=1
+  url: http://localhost:8080/item-manager/get-all-items?shelfId=2
   params:
     - name: shelfId
-      value: "1"
+      value: "2"
       type: query
   body:
     type: json
@@ -18,7 +18,7 @@ http:
       }
   auth:
     type: bearer
-    token: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoic3Ryb25nZXN0LmVsdmVtYWdlQHBvc3QuaHIiLCJ1aWQiOjEsImV4cCI6MTc4OTc0OTU1OCwiaWF0IjoxNzg5NzQ4NjU4LCJyb2xlcyI6IlJPTEVfVVNFUiBGQUNUT1JfUEFTU1dPUkQifQ.g_VxAagJ9aebBxc8o0gxjbNs-5DdwZB0WmEfHhBWgvy_oJ4EnFbVgqOPPcD80qObVztcX1jMpPotxg9eohT8YFAoBW5CujAs2EmT3vU2VBD3ZGSnWJhY2npOWHHiS4HeJxBRmmHYCTiHeaMS4ZztOwuLjM0eQ5INRmtTvdO22X87noRv6V1GVE83n8tGu1CkF3sVf9h-QtkSi8Zmy5NG8sYubE3AK2F9lTPS5GDsCjl4Ni90WzvkbFifKH6OfJQ2VtwZzOZCha175O83By_XXV50Mwd_AJygmec1SplXqJLd0SeO5VJB9WmYwedevu2tP0sXGTTDZBiUzLpz2MNm-Q
+    token: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoic3Ryb25nZXN0LmVsdmVtYWdlQHBvc3QuaHIiLCJ1aWQiOjIsImV4cCI6MTc5MDM2OTU1NSwiaWF0IjoxNzkwMzY4NjU1LCJyb2xlcyI6IlJPTEVfVVNFUiJ9.MS-W2heDUjuCryXkEksG4VzgAidBrao77RKFRwObeMTXxB4Pt3JJReCgIR2y5-Qgvu4tr6LoLcRLP5hLiL1ocEAOZhHynzhlJzxkEzxSJxQhnSkvRCz4VGlw3IGXLwl2HPLONypJeBOyx7U854GNuvNbLjEokG6lMw1xBv_24fI24odPInd1nvENWAEEDzv2SlI_Mt-oGumg649hgd4UrDpmHin37X2PpZqI_62jwk9uUK-L1VJpv-EAqnqvQIKqzgiK-snqyUgto0wxzATNW0StMK3J8eKtzv2dWOCISbelACMOpxhkE7WTC5ucMyw0JYQu8PhE_6SHQhjYUker5A
 
 settings:
   encodeUrl: true

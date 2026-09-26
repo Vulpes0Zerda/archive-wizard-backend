@@ -9,6 +9,7 @@ import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.dialect.type.PostgreSQLEnumJdbcType;
 import org.hibernate.type.SqlTypes;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 // JPA
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,26 +41,32 @@ public class User {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
   @SequenceGenerator(name = "users_seq", sequenceName = "users_sequence", allocationSize = 1)
   @Column(name = "id", nullable = false, unique = true)
+  @JsonIgnore
   private Integer id;
 
   @Column(name = "name", nullable = false, length = 120)
   private String name;
 
   @Column(name = "email", unique = true, nullable = false, length = 320)
+  @JsonIgnore
   private String email;
 
   @Column(name = "password_hash", nullable = false, columnDefinition = "TEXT")
+  @JsonIgnore
   private String passwordHash;
 
   @Column(name = "authority", nullable = false)
   @JdbcTypeCode(SqlTypes.NAMED_ENUM)
   @JdbcType(value = PostgreSQLEnumJdbcType.class)
+  @JsonIgnore
   private Authority authority = Authority.USER;
 
   @OneToMany(mappedBy = "user")
+  @JsonIgnore
   private List<Shelf> shelfs;
 
   @OneToMany(mappedBy = "user")
+  @JsonIgnore
   private List<CategoryGroup> categoryGroups;
 
   // ──────────────────────────────────────────────────────────────

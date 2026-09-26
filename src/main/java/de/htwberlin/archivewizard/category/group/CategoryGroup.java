@@ -59,6 +59,7 @@ public class CategoryGroup {
   private List<Shelf> shelfs;
 
   @OneToMany(mappedBy = "categoryGroup")
+  @JsonIgnore
   private List<CategoryKey> categoryKeys;
 
   // ──────────────────────────────────────────────────────────────

@@ -1,5 +1,6 @@
 package de.htwberlin.archivewizard.category.value;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 // ArchiveWizard
 import de.htwberlin.archivewizard.category.key.CategoryKey;
 import de.htwberlin.archivewizard.item.Item;
@@ -48,8 +49,9 @@ public class CategoryValue {
   @JoinColumn(name = "belongs_to_category_key", nullable = false)
   private CategoryKey categoryKey;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "tags_item", nullable = false)
+  @JsonIgnore
   private Item item;
 
   // ──────────────────────────────────────────────────────────────
