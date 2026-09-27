@@ -23,7 +23,7 @@ public class CategoryValueController {
     this.categoryValueService = categoryValueService;
   }
 
-  @PatchMapping("/update-category-value")
+  @PatchMapping("/update-category-values")
   public ResponseEntity<List<CategoryValue>> updateCategoryValue(
       @AuthenticationPrincipal Jwt decodedJwt,
       @RequestBody List<UpdateCategoryValueRequest> updateCategoryValueData) {
