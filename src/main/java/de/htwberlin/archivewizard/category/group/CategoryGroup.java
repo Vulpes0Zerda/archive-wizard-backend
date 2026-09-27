@@ -58,7 +58,7 @@ public class CategoryGroup {
   @JsonIgnore
   private List<Shelf> shelfs;
 
-  @OneToMany(mappedBy = "categoryGroup")
+  @OneToMany(mappedBy = "categoryGroup", fetch = FetchType.EAGER)
   @JsonIgnore
   private List<CategoryKey> categoryKeys;
 
@@ -89,6 +89,10 @@ public class CategoryGroup {
     this.name = name;
   }
 
+  public void setUser(final User user) {
+    this.user = user;
+  }
+
   // ──────────────────────────────────────────────────────────────
   // Getters
   // ──────────────────────────────────────────────────────────────
@@ -99,6 +103,10 @@ public class CategoryGroup {
 
   public String getName() {
     return this.name;
+  }
+
+  public User getUser() {
+    return this.user;
   }
 
   public List<Shelf> getShelfs() {

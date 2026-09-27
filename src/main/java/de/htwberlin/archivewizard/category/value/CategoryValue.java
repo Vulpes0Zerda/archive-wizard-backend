@@ -34,6 +34,7 @@ public class CategoryValue {
   // Attributes
   // ──────────────────────────────────────────────────────────────
 
+  // TODO: Change this to a composite key if possible
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_value_seq")
   @SequenceGenerator(name = "category_value_seq", sequenceName = "category_value_sequence",
@@ -42,7 +43,6 @@ public class CategoryValue {
   private Long id;
 
   @Column(name = "value", nullable = true, columnDefinition = "TEXT")
-  @Lob
   private String value;
 
   @ManyToOne(fetch = FetchType.EAGER)
