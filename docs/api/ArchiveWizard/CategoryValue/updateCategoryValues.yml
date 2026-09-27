@@ -1,0 +1,27 @@
+info:
+  name: updateCategoryValues
+  type: http
+  seq: 1
+
+http:
+  method: PATCH
+  url: http://localhost:8080/category-value-manager/update-category-value
+  body:
+    type: json
+    data: |-
+      [
+        {
+          "value": "TestName",
+          "categoryKeyId": 3,
+          "itemId": 3
+        }
+      ]
+  auth:
+    type: bearer
+    token: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoic3Ryb25nZXN0LmVsdmVtYWdlQHBvc3QuaHIiLCJ1aWQiOjIsImV4cCI6MTc5MDUzMjE2MSwiaWF0IjoxNzkwNTMxMjYxLCJyb2xlcyI6IlJPTEVfVVNFUiJ9.CUBEheJIy1xF-RIeJTbjkVPR5G61fFUvMDHalLZwZlVyGO93U44e5dMajKiPI9bXYCahY2pxC87I1BlXqtDFdNBho5BielagKBtEz7r2XBYy0PAOeEJOjxSsAif6aX4gQK51DOvSLk8-RjiUPLplJl1BhwLIo1fvW2M0vsHab4cAyTnjr7H8H9Rro7Din7CWzCw4uHUrGvQKXiEB36A7ToJYdnboVX-FaVSgec5vbQhCVPxydUqokiBBdJC8xAk1ny-N4TvbZCHUZyVjkh7u8_yfUJAJSRQJaHWZvkRDEUstJxJ-zuIF68Pgwu-D1d6K1mIeGK3yoYeJDV98JHv7Ag
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

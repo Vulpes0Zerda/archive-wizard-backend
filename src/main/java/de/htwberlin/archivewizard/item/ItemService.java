@@ -2,9 +2,7 @@ package de.htwberlin.archivewizard.item;
 
 import java.nio.file.AccessDeniedException;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import de.htwberlin.archivewizard.shelf.Shelf;
 import de.htwberlin.archivewizard.shelf.ShelfRepository;
 import jakarta.persistence.EntityManager;
@@ -15,7 +13,6 @@ public class ItemService {
 
   private ShelfRepository shelfRepository;
   private ItemRepository itemRepository;
-  @Autowired
   private EntityManager entityManager;
 
   public ItemService(ShelfRepository shelfRepository, ItemRepository itemRepository,
