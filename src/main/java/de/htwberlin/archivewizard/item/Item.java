@@ -9,6 +9,7 @@ import java.util.List;
 
 // JPA
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -54,7 +55,7 @@ public class Item {
   @Basic(fetch = FetchType.EAGER)
   private byte[] picture;
 
-  @OneToMany(mappedBy = "item", fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "item", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
   private List<CategoryValue> categoryValues;
 
   // ──────────────────────────────────────────────────────────────
