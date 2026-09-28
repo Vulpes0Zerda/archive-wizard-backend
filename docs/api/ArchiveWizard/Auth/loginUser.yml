@@ -1,0 +1,21 @@
+info:
+  name: loginUser
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:8080/auth-manager/login
+  body:
+    type: json
+    data: |-
+      {
+        "email": "strongest.elvemage@post.hr",
+        "password": "1234"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

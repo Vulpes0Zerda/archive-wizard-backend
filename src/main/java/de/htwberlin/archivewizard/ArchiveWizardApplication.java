@@ -1,4 +1,4 @@
-package de.htw_berlin.archive_wizard;
+package de.htwberlin.archivewizard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

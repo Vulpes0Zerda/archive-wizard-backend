@@ -1,9 +1,20 @@
 HELP.md
+
+### Gradle Files ###
 .gradle
+
+### Build Files ###
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+### Secrets ###
+gradle.properties
+**/src/main/resources/certs/
+
+### DrawIO ###
+*.bkp
 
 ### STS ###
 .apt_generated
